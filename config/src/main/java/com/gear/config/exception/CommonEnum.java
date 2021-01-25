@@ -1,4 +1,4 @@
-package com.gear.config.exceptionHandler;
+package com.gear.config.exception;
 
 /**
  * 常见的枚举
@@ -19,12 +19,12 @@ public enum CommonEnum implements BaseErrorInfoInterface {
     /**
      * 错误码
      */
-    private String resultCode;
+    private final String resultCode;
 
     /**
      * 错误描述
      */
-    private String resultMsg;
+    private final String resultMsg;
 
     CommonEnum(String resultCode, String resultMsg) {
         this.resultCode = resultCode;

@@ -1,4 +1,4 @@
-package com.gear.config.exceptionHandler;
+package com.gear.config.exception;
 
 import com.gear.config.ResultBody;
 import org.slf4j.Logger;
@@ -24,9 +24,9 @@ public class GlobalExceptionHandler {
     /**
      * 处理自定义的业务异常
      *
-     * @param req
-     * @param e
-     * @return
+     * @param req 要求的事情
+     * @param e   e
+     * @return {@link ResultBody }
      */
     @ExceptionHandler(value = BizException.class)
     @ResponseBody
@@ -38,9 +38,9 @@ public class GlobalExceptionHandler {
     /**
      * 处理空指针的异常
      *
-     * @param req
-     * @param e
-     * @return
+     * @param req 要求的事情
+     * @param e   e
+     * @return {@link ResultBody }
      */
     @ExceptionHandler(value = NullPointerException.class)
     @ResponseBody
@@ -53,9 +53,9 @@ public class GlobalExceptionHandler {
     /**
      * 处理其他异常
      *
-     * @param req
-     * @param e
-     * @return
+     * @param req 要求的事情
+     * @param e   e
+     * @return {@link ResultBody }
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody

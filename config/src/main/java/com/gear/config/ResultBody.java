@@ -1,8 +1,8 @@
 package com.gear.config;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gear.config.exceptionHandler.BaseErrorInfoInterface;
-import com.gear.config.exceptionHandler.CommonEnum;
+import com.gear.config.exception.BaseErrorInfoInterface;
+import com.gear.config.exception.CommonEnum;
 
 /**
  * 返回结果定义
@@ -30,6 +30,12 @@ public class ResultBody {
     public ResultBody() {
     }
 
+    /**
+     * 结果
+     *
+     * @param errorInfo 错误信息
+     * @return {@link  }
+     */
     public ResultBody(BaseErrorInfoInterface errorInfo) {
         this.code = errorInfo.getResultCode();
         this.message = errorInfo.getResultMsg();
@@ -38,7 +44,7 @@ public class ResultBody {
     /**
      * 成功
      *
-     * @return
+     * @return {@link ResultBody }
      */
     public static ResultBody success() {
         return success(null);
@@ -47,8 +53,8 @@ public class ResultBody {
     /**
      * 成功
      *
-     * @param data
-     * @return
+     * @param data 数据
+     * @return {@link ResultBody }
      */
     public static ResultBody success(Object data) {
         ResultBody rb = new ResultBody();

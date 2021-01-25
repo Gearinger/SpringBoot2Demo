@@ -1,7 +1,7 @@
 package com.gear.testdemo.controller;
 
 import com.gear.config.ResultBody;
-import com.gear.config.exceptionHandler.BizException;
+import com.gear.config.exception.BizException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

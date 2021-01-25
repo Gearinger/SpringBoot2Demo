@@ -1,4 +1,4 @@
-package com.gear.config.exceptionHandler;
+package com.gear.config.exception;
 
 /**
  * 业务异常

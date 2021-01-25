@@ -1,4 +1,4 @@
-package com.gear.config.exceptionHandler;
+package com.gear.config.exception;
 
 /**
  * 基本错误信息界面
@@ -9,12 +9,16 @@ package com.gear.config.exceptionHandler;
  */
 public interface BaseErrorInfoInterface {
     /**
-     * 错误码
+     * 得到的结果代码
+     *
+     * @return {@link String }
      */
     String getResultCode();
 
     /**
-     * 错误描述
+     * 得到结果味精
+     *
+     * @return {@link String }
      */
     String getResultMsg();
 }
