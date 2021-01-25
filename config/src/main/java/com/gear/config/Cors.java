@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date 2021/01/25
  */
 @Configuration
-public class CORS {
+public class Cors {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -24,7 +24,7 @@ public class CORS {
                 registry.addMapping("/**")
                         .allowedOrigins("*")
                         .allowCredentials(true)
-                        .allowedMethods("GET", "POST", "DELETE", "PUT","PATCH")
+                        .allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH")
                         .maxAge(3600);
             }
         };

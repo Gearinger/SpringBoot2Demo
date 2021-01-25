@@ -8,9 +8,13 @@ package com.gear.config.exceptionHandler;
  * @date 2021/01/25
  */
 public interface BaseErrorInfoInterface {
-    /** 错误码*/
+    /**
+     * 错误码
+     */
     String getResultCode();
 
-    /** 错误描述*/
+    /**
+     * 错误描述
+     */
     String getResultMsg();
 }

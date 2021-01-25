@@ -35,30 +35,6 @@ public class ResultBody {
         this.message = errorInfo.getResultMsg();
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Object getResult() {
-        return result;
-    }
-
-    public void setResult(Object result) {
-        this.result = result;
-    }
-
     /**
      * 成功
      *
@@ -70,6 +46,7 @@ public class ResultBody {
 
     /**
      * 成功
+     *
      * @param data
      * @return
      */
@@ -106,12 +83,36 @@ public class ResultBody {
     /**
      * 失败
      */
-    public static ResultBody error( String message) {
+    public static ResultBody error(String message) {
         ResultBody rb = new ResultBody();
         rb.setCode("-1");
         rb.setMessage(message);
         rb.setResult(null);
         return rb;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Object getResult() {
+        return result;
+    }
+
+    public void setResult(Object result) {
+        this.result = result;
     }
 
     @Override
