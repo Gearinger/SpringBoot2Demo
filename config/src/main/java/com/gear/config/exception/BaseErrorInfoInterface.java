@@ -9,14 +9,14 @@ package com.gear.config.exception;
  */
 public interface BaseErrorInfoInterface {
     /**
-     * 得到的结果代码
+     * 获取的结果状态码
      *
      * @return {@link String }
      */
     String getResultCode();
 
     /**
-     * 得到结果味精
+     * 获取结果信息
      *
      * @return {@link String }
      */

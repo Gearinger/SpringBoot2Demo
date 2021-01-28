@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController("/")
 public class TestController {
+    /**
+     * 测试
+     *
+     * @return {@link String }
+     */
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     public String test() {
         return "~~~~~~~~~~~~~~";

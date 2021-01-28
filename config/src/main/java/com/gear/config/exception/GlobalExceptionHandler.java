@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 /**
- * 全局异常处理程序
+ * 全局异常处理
  *
  * @author guoyd
  * @version 1.0.0
