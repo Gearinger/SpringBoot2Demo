@@ -21,6 +21,7 @@
 
     <modules>
         <module>config</module>
+        <module>test-demo</module>
     </modules>
 
     <dependencies>
