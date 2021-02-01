@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = BizException.class)
     @ResponseBody
     public ResultBody bizExceptionHandler(HttpServletRequest req, BizException e) {
-        logger.error("发生业务异常！原因是：{}", e.getErrorMsg());
+        logger.error("业务异常！原因：{}", e.getErrorMsg());
         return ResultBody.error(e.getErrorCode(), e.getErrorMsg());
     }
 
@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = NullPointerException.class)
     @ResponseBody
     public ResultBody exceptionHandler(HttpServletRequest req, NullPointerException e) {
-        logger.error("发生空指针异常！原因是:", e);
+        logger.error("空指针异常！原因:", e);
         return ResultBody.error(CommonEnum.BODY_NOT_MATCH);
     }
 
@@ -60,7 +60,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResultBody exceptionHandler(HttpServletRequest req, Exception e) {
-        logger.error("未知异常！原因是:", e);
+        logger.error("未知异常！原因:", e);
         return ResultBody.error(CommonEnum.INTERNAL_SERVER_ERROR);
     }
 }

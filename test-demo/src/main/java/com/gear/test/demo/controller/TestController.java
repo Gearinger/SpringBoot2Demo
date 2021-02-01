@@ -46,7 +46,7 @@ public class TestController {
         System.out.println("开始更新...");
         //这里故意造成一个空指针的异常，并且不进行处理
         String str = null;
-        "111".equals(str);
+        str.equals("111");
         return true;
     }
 
