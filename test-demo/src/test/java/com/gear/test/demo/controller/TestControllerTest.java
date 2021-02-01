@@ -1,6 +1,5 @@
-package com.gear.testdemo.controller;
+package com.gear.test.demo.controller;
 
-import com.gear.testdemo.TestDemoApplication;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,19 +27,4 @@ class TestControllerTest {
                 .andExpect(content().string("~~~~~~~~~~~~~~"));
     }
 
-    @Test
-    void testException() {
-    }
-
-    @Test
-    void testException3() {
-    }
-
-    @Test
-    void testException4() {
-    }
-
-    @Test
-    void testException5() {
-    }
 }

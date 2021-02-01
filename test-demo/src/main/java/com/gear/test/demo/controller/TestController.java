@@ -1,7 +1,8 @@
-package com.gear.testdemo.controller;
+package com.gear.test.demo.controller;
 
 import com.gear.config.ResultBody;
 import com.gear.config.exception.BizException;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0.0
  * @date 2021/01/25
  */
-@RestController("/")
+@Api(tags = "test")
+@RestController
+@RequestMapping("/test")
 public class TestController {
     /**
      * 测试

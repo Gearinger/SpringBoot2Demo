@@ -1,11 +1,10 @@
-package com.gear.testdemo;
+package com.gear.test.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.core.env.PropertySource;
-import org.springframework.web.context.support.ServletConfigPropertySource;
+import org.springframework.context.ApplicationContext;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
@@ -15,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @version 1.0.0
  * @date 2021/01/25
  */
-@SpringBootApplication(scanBasePackages = {"com.gear.config", "com.gear.testdemo"})
+@SpringBootApplication(scanBasePackages = {"com.gear.config", "com.gear.test.demo"})
 @EnableSwagger2
 public class TestDemoApplication {
 
@@ -23,7 +22,7 @@ public class TestDemoApplication {
     ServerProperties serverProperties;
 
     public static void main(String[] args) {
-        SpringApplication.run(TestDemoApplication.class, args);
+        ApplicationContext run = SpringApplication.run(TestDemoApplication.class, args);
         System.out.println("----------程序开始运行----------");
     }
 }
