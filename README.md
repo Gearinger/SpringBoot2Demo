@@ -74,8 +74,32 @@
   public class SwaggerConfig extends WebMvcConfigurationSupport {
       @Bean
       public Docket createRestApi() {
-          return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
-                  .apis(RequestHandlerSelectors.basePackage("***")).paths(PathSelectors.any()).build();
+          return new Docket(DocumentationType.SWAGGER_2)
+                  .apiInfo(apiInfo())
+                  .select()
+                  .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+                  .paths(PathSelectors.any())
+                  .build();
+      }
+  
+      @Bean
+      UiConfiguration uiConfig() {
+          return UiConfigurationBuilder.builder()
+                  .deepLinking(true)
+                  .displayOperationId(false)
+                  .defaultModelsExpandDepth(1)
+                  .defaultModelExpandDepth(1)
+                  .defaultModelRendering(ModelRendering.EXAMPLE)
+                  .displayRequestDuration(false)
+                  .docExpansion(DocExpansion.NONE)
+                  .filter(false)
+                  .maxDisplayedTags(null)
+                  .operationsSorter(OperationsSorter.ALPHA)
+                  .showExtensions(false)
+                  .tagsSorter(TagsSorter.ALPHA)
+                  .supportedSubmitMethods(UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS)
+                  .validatorUrl(null)
+                  .build();
       }
   
       private ApiInfo apiInfo() {
@@ -98,6 +122,132 @@
   ```
 
 - 返回结果包装
+
+~~~java
+/**
+ * 返回结果定义
+ *
+ * @author guoyd
+ * @version 1.0.0
+ * @date 2021/01/25
+ */
+public class ResultBody<T> {
+    /**
+     * 响应代码
+     */
+    private String code;
+
+    /**
+     * 响应消息
+     */
+    private String message;
+
+    /**
+     * 响应结果
+     */
+    private T result;
+
+    public ResultBody() {
+    }
+
+    /**
+     * 结果
+     *
+     * @param errorInfo 错误信息
+     * @return {@link  }
+     */
+    public ResultBody(BaseErrorInfoInterface errorInfo) {
+        this.code = errorInfo.getResultCode();
+        this.message = errorInfo.getResultMsg();
+    }
+
+    /**
+     * 成功
+     *
+     * @return {@link ResultBody }
+     */
+    public static <T> ResultBody<T> success() {
+        return success(null);
+    }
+
+    /**
+     * 成功
+     *
+     * @param data 数据
+     * @return {@link ResultBody }
+     */
+    public static <T> ResultBody<T> success(T data) {
+        ResultBody<T> rb = new ResultBody<T>();
+        rb.setCode(CommonEnum.SUCCESS.getResultCode());
+        rb.setMessage(CommonEnum.SUCCESS.getResultMsg());
+        rb.setResult(data);
+        return rb;
+    }
+
+    /**
+     * 失败
+     */
+    public static <T> ResultBody<T> error(BaseErrorInfoInterface errorInfo) {
+        ResultBody<T> rb = new ResultBody<T>();
+        rb.setCode(errorInfo.getResultCode());
+        rb.setMessage(errorInfo.getResultMsg());
+        rb.setResult(null);
+        return rb;
+    }
+
+    /**
+     * 失败
+     */
+    public static <T> ResultBody<T> error(String code, String message) {
+        ResultBody<T> rb = new ResultBody<T>();
+        rb.setCode(code);
+        rb.setMessage(message);
+        rb.setResult(null);
+        return rb;
+    }
+
+    /**
+     * 失败
+     */
+    public static <T> ResultBody<T> error(String message) {
+        ResultBody<T> rb = new ResultBody<T>();
+        rb.setCode("-1");
+        rb.setMessage(message);
+        rb.setResult(null);
+        return rb;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getResult() {
+        return result;
+    }
+
+    public void setResult(T result) {
+        this.result = result;
+    }
+
+    @Override
+    public String toString() {
+        return JSONObject.toJSONString(this);
+    }
+
+}
+~~~
 
 - 全局异常
 
@@ -353,6 +503,61 @@ public class Cors {
 ## 四、新建模块
 
 ![image-20210128102910202](https://i.loli.net/2021/01/28/8ZTOFs7DXGCJbNv.png)
+
+> controller 必须使用@Api注解，因当前swagger配置的是用该注解扫描
+
+~~~java
+/**
+ * 测试控制器
+ *
+ * @author guoyd
+ * @version 1.0.0
+ * @date 2021/01/25
+ */
+@Api(tags = "test")
+@RestController
+@RequestMapping("/test")
+public class TestController {
+    /**
+     * 测试
+     *
+     * @return {@link String }
+     */
+    @RequestMapping(value = "/test1", method = RequestMethod.GET)
+    public String test() {
+        return "~~~~~~~~~~~~~~";
+    }
+
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    public ResultBody testException() throws Exception {
+        return ResultBody.success("Test Wrong!!!");
+    }
+
+    @GetMapping("/test3")
+    public boolean testException3() {
+        System.out.println("开始新增...");
+        //如果姓名为空就手动抛出一个自定义的异常！
+        throw new BizException("-1", "用户姓名不能为空！");
+    }
+
+    @GetMapping("/test4")
+    public boolean testException4() {
+        System.out.println("开始更新...");
+        //这里故意造成一个空指针的异常，并且不进行处理
+        String str = null;
+        str.equals("111");
+        return true;
+    }
+
+    @GetMapping("/test5")
+    public boolean testException5() {
+        System.out.println("开始删除...");
+        //这里故意造成一个异常，并且不进行处理
+        Integer.parseInt("abc123");
+        return true;
+    }
+}
+~~~
 
 > 新建模块启动程序需指定扫描组件的位置 scanBasePackages，使config模块被扫描到；
 
